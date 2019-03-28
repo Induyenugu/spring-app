@@ -1,8 +1,11 @@
 package springapp.command;
 
+import java.util.List;
+
 import springapp.domain.Client;
 import springapp.domain.Gender;
 import springapp.domain.Pet;
+import springapp.service.ClientService;
 
 /**
  * The command object is use when passing data back and forth between the client and server
@@ -124,6 +127,7 @@ public class PetCommand {
 	public Client getClient() {
 		return client;
 	}
+	
 
 	/**
 	 * Set the client associated with the pet

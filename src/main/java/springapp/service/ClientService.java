@@ -4,6 +4,8 @@ package springapp.service;
 import java.util.List;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,8 @@ import springapp.domain.Pet;
 @Service
 public class ClientService {
 
+	private Logger logger = LoggerFactory.getLogger(ClientDao.class);
+	
 	@Autowired 
 	ClientDao clientDao;
 
@@ -33,6 +37,7 @@ public class ClientService {
 	}
 	
 	public Client getClient(Integer id) {
+		logger.info("Client Id:" + id);
 		return clientDao.get(id);
 	}
 
@@ -43,8 +48,8 @@ public class ClientService {
 
 	
 	public Client saveClient(ClientCommand toSave) {
-		Client client = new Client(toSave.getId(), toSave.getName(), toSave.getPhoneNumber(), toSave.getAddress());
-
+		Client client = new Client(toSave.getId(), toSave.getName(), toSave.getPhoneNumber(), toSave.getAddress(), toSave.getEmail()==null?"":toSave.getEmail());	
+		logger.info("Client Service: Save method called");
 		return clientDao.save(client);
 	}
 	

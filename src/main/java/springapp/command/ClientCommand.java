@@ -10,6 +10,7 @@ public class ClientCommand {
 	
 	private Integer id;
 	private String name;
+	private String email;
 	private String address;
 	private String phoneNumber;
 
@@ -23,6 +24,7 @@ public class ClientCommand {
 			this.name = client.getName();
 			this.address = client.getAddress();
 			this.phoneNumber = client.getPhoneNumber();
+			this.email= client.getEmail();
 		}
 	}
 
@@ -57,6 +59,14 @@ public class ClientCommand {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+	/**
+	 * Set the email of the client
+	 * @param email the client email
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 
 	/**
 	 * @return the client id, returns null if this client is new and not persisted to the database yet
@@ -84,6 +94,13 @@ public class ClientCommand {
 	 */
 	public String getPhoneNumber() {
 		return phoneNumber;
+	}
+	
+	/**
+	 * @return the client Email
+	 */
+	public String getEmail() {
+		return email;
 	}
   
 }

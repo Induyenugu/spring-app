@@ -72,7 +72,7 @@ public class ClientController {
 			// we create a client command that can be used when the browser sends the save object
 			model.addAttribute("command", new ClientCommand(client));
 
-			// we get the list of pets, and send those as is since we dont need a command to carry changes to the pets
+			// we get the list of pets, and send those as is since we don't need a command to carry changes to the pets
             // from this page
 			model.addAttribute("pets", clientService.getPets(client.getId()) );
 		}
@@ -82,7 +82,7 @@ public class ClientController {
     /**
      * Saves the updates to a client based on the command that was sent from the client side
      * @param command the command corresponding with how the client object should be updated/created
-     * @param redirectAttributes holds the attribtues that we may want to pass to the get page after a save
+     * @param redirectAttributes holds the attributes that we may want to pass to the get page after a save
      * @return the edit client view template
      */
 	 @PreAuthorize("hasAuthority('SAVE_CLIENT')")
@@ -92,15 +92,14 @@ public class ClientController {
 	     //NOTE: if we want to capture errors correctly, we would wrap the following code in a try/catch
          // and the catch would add a nice error message to the mode
          // then the view template would render a nice error message
-
+		 logger.info("Client controller: Save client called");
 	     // we pass the command to the service, and it nows how update/create a client
          // the service returns the new client object back to us after the save
 	     Client client = clientService.saveClient(command);
 
 	     // we add in a "saved" attribute so we can print a nice message indicating a save was successfull
-		 redirectAttributes.addAttribute("saved", true);
-
-
+	     redirectAttributes.addAttribute("saved", true);
+	     
 	     return "redirect:/clients/"+client.getId();
 		  
      }

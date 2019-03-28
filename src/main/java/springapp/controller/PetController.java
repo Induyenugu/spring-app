@@ -53,12 +53,14 @@ public class PetController {
 	@PreAuthorize("hasAuthority('LIST_PETS')")
 	@GetMapping
 	 public String listPets(Model model) {
+		
 	    // get the list of pets from the service
         List<Pet> pets = petService.getPets();
-
+       
         // we add the pets to the model
         // Note we are not adding the PetCommand instances, but Pet instances
 		model.addAttribute("pets", pets);
+		model.addAttribute("clientService", clientService);
         return "pets/listPets";
     }
 
@@ -109,14 +111,20 @@ public class PetController {
         // which we should probably handle....
 
         // we get the client based on the client id in the command
+		
 		Client client = clientService.getClient(petCommand.getClientId());
+		
+		List<Client> clientList = clientService.getClients();
 
+		logger.info("total clients : "+clientList.size());
 		// we set the client instance in the pet command,
         // when we got the command earlier, we only had the clientid, but now we should have the full client object.
         // we do this because we want to display the client info (name) not just the id.
 		petCommand.setClient(client);			
 
 		// we add the command pet command instance to the mode (which has the client instance as well as the pet info)
+		
+		model.addAttribute("clientList", clientList );  
 		model.addAttribute("command", petCommand);
 		return "pets/editPet";
 	}
