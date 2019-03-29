@@ -24,3 +24,7 @@ create table users (
 );
 
 insert into users values (null, 'admin', 'password', 'SUPER_ADMIN');
+
+ALTER TABLE Clients Add column email varchar(255);
+
+
